@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKotasTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateKotasTable extends Migration
      */
     public function up()
     {
-        Schema::create('kotas', function (Blueprint $table) {
-            $table->uuid('kota_id')->primary()->nullable(false);
-            $table->string("nama_kota", 100)->nullable();
-            $table->string("kode_kota", 10)->nullable();
+        Schema::create('tags', function (Blueprint $table) {
+            $table->uuid('tag_id')->nullable(false)->primary();
+            $table->string('nama_tag', 100)->nullable();
 //            $table->timestamps();
 
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
@@ -32,6 +31,6 @@ class CreateKotasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kotas');
+        Schema::dropIfExists('tags');
     }
 }

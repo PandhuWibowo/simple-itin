@@ -4,13 +4,13 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Kota extends Model
+class Tag extends Model
 {
     use SoftDeletes;
-    protected $table = "kotas";
-    protected $primaryKey = "kota_id";
+    protected $table = "tags";
+    protected $primaryKey = "tag_id";
     protected $fillable = [
-        "kota_id", "nama_kota", "kode_kota"
+        "tag_id", "nama_tag"
     ];
 
     public $incrementing = false;
