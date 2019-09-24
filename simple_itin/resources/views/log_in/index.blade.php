@@ -23,15 +23,26 @@
                                 <div class="col-lg-10 col-xl-7 mx-auto">
                                     <h3 class="display-4">Sign In</h3>
                                     <p class="text-muted mb-4">“The world is a book, and those who do not travel read only one page.” – Saint Augustine</p>
-                                    <form action="" method="POST">
+                                    <form action="{{ route('login') }}" method="POST">
+                                        @csrf
                                         <div class="form-group mb-3">
-                                            <input id="inputEmail" type="email" placeholder="Email address" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                            <input id="email" type="email" name="email" placeholder="Email address" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4{{ $errors->has('email') ? ' is-invalid' : '' }}">
+                                            @if ($errors->has('email'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                         <div class="form-group mb-3">
-                                            <input id="inputPassword" type="password" placeholder="Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                            <input id="password" type="password" name="password" placeholder="Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary {{ $errors->has('password') ? ' is-invalid' : '' }}">
+                                            @if ($errors->has('password'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
 {{--                                        <div class="custom-control custom-checkbox mb-3">--}}
-{{--                                            <input id="customCheck1" type="checkbox" checked class="custom-control-input">--}}
+{{--                                            <input id="customCheck1" type="checkbox" class="custom-control-input" {{ old('remember') ? 'checked' : '' }}>--}}
 {{--                                            <label for="customCheck1" class="custom-control-label">Remember password</label>--}}
 {{--                                        </div>--}}
                                         <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>

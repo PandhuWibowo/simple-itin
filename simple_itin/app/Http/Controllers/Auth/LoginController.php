@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/backend/home';
 
     /**
      * Create a new controller instance.
@@ -47,19 +47,25 @@ class LoginController extends Controller
         return view('log_in.index');
     }
 
-    /**
-     * Validate the user login request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     */
-    protected function validateLogin(Request $request)
+
+//    protected function validateLogin(Request $request)
+//    {
+//        $this->validate($request, [
+//            'email' => 'required|string',
+//            'password' => 'required|string'
+//        ]);
+//    }
+
+    public function logout(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|string',
-            'password' => 'required|string',
-//            'code' => 'required|exists|users,code',
-        ]);
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('login');
     }
+
 
 }

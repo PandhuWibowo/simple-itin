@@ -12,6 +12,9 @@ Route::get('/clear-cache', function() {
 });
 
 
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/backend/home', 'HomeController@index');
+
+
