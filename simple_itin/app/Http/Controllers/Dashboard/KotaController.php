@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Models\Kota;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Uuid;
 
 class KotaController extends Controller
 {
@@ -19,7 +20,28 @@ class KotaController extends Controller
     }
 
     public function store(Request $request){
+        $namaKota = ucfirst(trim($request->nama_kota));
 
+        $storeKota = new Kota([
+            "kota_id" => Uuid::generate()->string,
+            "nama_kota" => $namaKota
+        ]);
+
+        if($storeKota->save()){
+            return response()->json(
+                array(
+                    "response" => "success",
+                    "message" => "Data has been saved"
+                )
+            );
+        }else{
+            return response()->json(
+                array(
+                    "response" => "error",
+                    "message" => "Data failed to update"
+                )
+            );
+        }
     }
 
     public function update(Request $request){

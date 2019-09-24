@@ -33,6 +33,7 @@ Route::namespace("Dashboard")->group(function(){
             Route::get("/","KotaController@index");
             Route::put("update","KotaController@update");
             Route::delete("delete","KotaController@destroy");
+            Route::post("store","KotaController@store");
         });
 
         //Bagian Dashboard ...

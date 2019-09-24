@@ -1,3 +1,54 @@
+$("#btnAddCity").on("click", function(e){
+    e.preventDefault();
+    let city = $("#city").val();
+
+    if(city == "" || city == undefined){
+        Swal.fire({
+            type: 'info',
+            title: 'Required',
+            text: 'City is required',
+        });
+    }else{
+        try {
+            $.ajax({
+                type    : "POST",
+                url     : "/backend/cities/store",
+                async   : true,
+                dataType: "JSON",
+                data    : {
+                    nama_kota   : city
+                },
+                success:function(data){
+                    if(data.response == "success"){
+                        $("#editModalCity").modal("hide");
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Success',
+                            text: data.message,
+                        }).then(function () {
+                            window.location.href = "cities";
+                        });
+                    }else{
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Failed',
+                            text: data.message,
+                        });
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        }
+        catch (e){
+            console.log(e);
+        }
+    }
+});
+
+
+//Modal Edit City
 $("#example1").on("click", ".btnEditCity", function(){
     let cityId = $(this).data("city_id");
     let city = $(this).data("city");
