@@ -13,7 +13,10 @@ Route::get('/clear-cache', function() {
     return 'DONE'; //Return anything
 });
 
-
+//Index
+Route::get("/", function(){
+    return redirect("login");
+});
 //Segala macam auth disini
 Auth::routes();
 
