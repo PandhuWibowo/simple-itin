@@ -20,7 +20,7 @@ $("#btnAddCity").on("click", function(e){
                 },
                 success:function(data){
                     if(data.response == "success"){
-                        $("#editModalCity").modal("hide");
+                        $("#addModalCity").modal("hide");
                         Swal.fire({
                             type: 'success',
                             title: 'Success',

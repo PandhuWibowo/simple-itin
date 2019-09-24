@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Models\JenisPenginapan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Uuid;
 class JenisPenginapanController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class JenisPenginapanController extends Controller
      */
     public function index()
     {
-        //
+        $accomodationTypes = JenisPenginapan::orderBy("nama_jenis_penginapan","asc")->get();
+        return view("dashboard_admin.main.jenis_penginapan.index", compact("accomodationTypes"));
     }
 
     /**
@@ -35,7 +37,28 @@ class JenisPenginapanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $namaJenisPenginapan = ucfirst(trim($request->nama_jenis_penginapan));
+        $storeJenisPenginapan = new JenisPenginapan([
+            "jenis_penginapan_id" => Uuid::generate()->string,
+            "nama_jenis_penginapan" => $namaJenisPenginapan
+        ]);
+
+        if($storeJenisPenginapan->save()){
+            return response()->json(
+                array(
+                    "response" => "success",
+                    "message" => "Data has been saved"
+                )
+            );
+        }else{
+            return response()->json(
+                array(
+                    "response" => "error",
+                    "message" => "Data failed to update"
+                )
+            );
+        }
+
     }
 
     /**
