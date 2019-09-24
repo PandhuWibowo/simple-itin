@@ -32,6 +32,7 @@ Route::namespace("Dashboard")->group(function(){
         Route::prefix("/cities")->group(function(){
             Route::get("/","KotaController@index");
             Route::put("update","KotaController@update");
+            Route::delete("delete","KotaController@destroy");
         });
 
         //Bagian Dashboard ...

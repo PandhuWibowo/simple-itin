@@ -39,8 +39,29 @@ class KotaController extends Controller
         }else{
             return response()->json(
                 array(
-                    "response"  => "success",
+                    "response"  => "error",
                     "message"   => "City failed to update"
+                )
+            );
+        }
+    }
+
+    public function destroy(Request $request){
+        $kotaId = trim($request->id);
+
+        if(Kota::where("kota_id", $kotaId)->delete()){
+            return response()->json(
+                array(
+                    "response"  => "success",
+                    "message"   => "Data has been deleted"
+                )
+            );
+        }
+        else{
+            return response()->json(
+                array(
+                    "response"  => "error",
+                    "message"   => "Data failed to update"
                 )
             );
         }
