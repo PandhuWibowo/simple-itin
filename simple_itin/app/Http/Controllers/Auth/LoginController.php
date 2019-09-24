@@ -36,4 +36,30 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('log_in.index');
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|string',
+            'password' => 'required|string',
+//            'code' => 'required|exists|users,code',
+        ]);
+    }
+
 }
