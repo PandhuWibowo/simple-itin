@@ -11,6 +11,9 @@
 }
 
 .bg-image {
+    /* Add the blur effect */
+    /*filter: blur(8px);*/
+    /*-webkit-filter: blur(8px);*/
     background-image: url('https://img4.goodfon.com/wallpaper/nbig/a/af/mountains-clouds-travel-wallpaper-background-priroda-peizazh.jpg');
     background-size: cover;
     background-position: center center;

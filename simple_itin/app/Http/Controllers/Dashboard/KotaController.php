@@ -21,4 +21,28 @@ class KotaController extends Controller
     public function store(Request $request){
 
     }
+
+    public function update(Request $request){
+        $kotaId = trim($request->kota_id);
+        $namaKota = ucfirst(trim($request->nama_kota));
+
+        $updateKota = Kota::findOrFail($kotaId);
+        $updateKota->nama_kota = $namaKota;
+
+        if($updateKota->save()){
+            return response()->json(
+                array(
+                    "response"  => "success",
+                    "message"   => "City has been updated"
+                )
+            );
+        }else{
+            return response()->json(
+                array(
+                    "response"  => "success",
+                    "message"   => "City failed to update"
+                )
+            );
+        }
+    }
 }
