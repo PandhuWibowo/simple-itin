@@ -36,7 +36,13 @@ Route::namespace("Dashboard")->group(function(){
             Route::post("store","KotaController@store");
         });
 
-        //Bagian Dashboard ...
+        //Bagian Dashboard Jenis Penginapan
+        Route::prefix("/accomodation-types")->group(function (){
+            Route::get("/","JenisPenginapanController@index");
+            Route::put("update","JenisPenginapanController@update");
+            Route::delete("delete","JenisPenginapanController@destroy");
+            Route::post("store","JenisPenginapanController@store");
+        });
 
     });
 });
