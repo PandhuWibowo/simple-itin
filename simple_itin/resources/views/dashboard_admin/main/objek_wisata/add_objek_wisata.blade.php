@@ -68,7 +68,18 @@
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form role="form" autocomplete="off" method="post" action="{{ url('/backend/tourist-attractions/store') }}" enctype="multipart/form-data">
+
                             <div class="box-body">
+                                @include("dashboard_admin.include.flash-message")
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="form-group">
                                     <label for="nama_wisata">Attraction Name</label>
                                     <input type="text" class="form-control" id="nama_wisata" name="nama_wisata" placeholder="Attraction Name" value="{{Session::get("sess_nama_wisata")}}">
