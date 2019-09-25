@@ -48,21 +48,20 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Room Types
+                Tourist Attraction
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ url('backend/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Room Types</li>
+                <li class="active">Tourist Attraction</li>
             </ol>
 
             <hr>
 
-            <button class="btn btn-primary btn-flat btn-md" data-toggle="modal" data-target="#addModalRoom">
+            <a class="btn btn-primary btn-flat btn-md" href="{{ url("backend/tourist-attractions/create") }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Add New
-            </button>
+            </a>
 
-            @include("dashboard_admin.main.jenis_penginapan.add_modal")
         </section>
 
         <!-- Main content -->
@@ -75,7 +74,7 @@
 
                         <!-- ./box-header -->
                         <div class="box-header">
-                            <h3 class="box-title">Room Types</h3>
+                            <h3 class="box-title">Tourist Attraction</h3>
                         </div>
 
                         <!-- ./box-body -->
@@ -84,20 +83,22 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Room Type</th>
+                                    <th>Tourist Attraction</th>
+                                    <th>City</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($accomodationTypes as $seq=>$row)
+                                @foreach($objekWisata as $seq=>$row)
                                     <tr>
                                         <td>{{$seq+1}}</td>
-                                        <td>{{$row->nama_jenis_penginapan}}</td>
+                                        <td>{{$row->nama_wisata}}</td>
+                                        <td>{{$row->getKota->nama_kota}}</td>
                                         <td>
-                                            <a class="btn btn-warning btn-md btn-flat btnEditRoom" data-toggle="tooltip" title="Edit" data-jenis_penginapan_id="{{$row->jenis_penginapan_id}}" data-nama_jenis_penginapan="{{$row->nama_jenis_penginapan}}">
+                                            <a class="btn btn-warning btn-md btn-flat btnEditWisata" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
-                                            <a class="btn btn-danger btn-md btn-flat btnRemoveRoom" data-toggle="tooltip" title="Remove" data-jenis_penginapan_id="{{$row->jenis_penginapan_id}}">
+                                            <a class="btn btn-danger btn-md btn-flat btnRemoveWisata" data-toggle="tooltip" title="Remove">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </td>
@@ -107,13 +108,12 @@
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Room Type</th>
+                                    <th>Tourist Attraction</th>
+                                    <th>City</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>
                             </table>
-
-                            @include("dashboard_admin.main.jenis_penginapan.edit_modal")
                         </div>
                         <!-- /.box-footer -->
                     </div>

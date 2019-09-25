@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Models\Kota;
+use App\Http\Models\ObjekWisata;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Models\Tag;
 
 class ObjekWisataController extends Controller
 {
@@ -19,7 +22,8 @@ class ObjekWisataController extends Controller
      */
     public function index()
     {
-
+        $objekWisata = ObjekWisata::orderBy("nama_wisata")->get();
+        return view("dashboard_admin.main.objek_wisata.index", compact("objekWisata"));
     }
 
     /**
@@ -29,7 +33,9 @@ class ObjekWisataController extends Controller
      */
     public function create()
     {
-        //
+        $kota = Kota::orderBy("nama_kota", "asc")->get();
+        $tag = Tag::orderBy("nama_tag", "asc")->get();
+        return view("dashboard_admin.main.objek_wisata.add_objek_wisata", compact("kota", "tag"));
     }
 
     /**

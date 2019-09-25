@@ -16,7 +16,7 @@ class CreateDetailTagsTable extends Migration
         Schema::create('detail_tags', function (Blueprint $table) {
             $table->uuid("tag_id");
             $table->uuid("wisata_id");
-            $table->string("nama_tag", 50)->nullable(false);
+//            $table->string("nama_tag", 50)->nullable(false);
 //            $table->timestamps();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
