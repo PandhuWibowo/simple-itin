@@ -210,7 +210,26 @@ $(function () {
     //Timepicker
     $('.timepicker').timepicker({
         showInputs: false
-    })
+    });
+
+    $(".tag_id").select2({
+        placeholder: "Please Select Tag first",
+        tags: true,
+        tokenSeparators: [',', ' '],
+        maximumSelectionLength: 5,
+        // matcher : function(term,res){
+        //     return false;
+        // },
+        "language": {
+            'noResults': function(){
+                return "Type keywords separated by commas";
+            }
+        }
+    }).on("change",function(e){
+        if($(this).val().length>5){
+            $(this).val($(this).val().slice(0,5));
+        }
+    });
 });
 </script>
 </body>
