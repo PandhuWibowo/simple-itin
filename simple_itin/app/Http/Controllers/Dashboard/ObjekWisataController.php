@@ -11,7 +11,7 @@ use Session;
 use Uuid;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-
+use Image;
 class ObjekWisataController extends Controller
 {
     public function __construct()
@@ -67,6 +67,61 @@ class ObjekWisataController extends Controller
         $slug = Str::slug($namaWisata);
 
         if($request->hasFile("image")){
+            request()->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $txtImage     = $request->file("image");
+            $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
+
+            $destinationPath = public_path('image/wisata');
+            $img = Image::make($txtImage->getRealPath());
+            $img->resize(100, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$txtImageName);
+
+            $wisataStore = new ObjekWisata([
+                "wisata_id" => Uuid::generate()->string,
+                "nama_wisata" => $namaWisata,
+                "slug"  => $slug,
+                "kota_id"   => $cityId,
+                "alamat" => $address,
+                "kontak"    => $phone,
+                "waktu_operasional" => $finalFormatTime,
+                "waktu_bagian"  => $timezone,
+                "website"   => $website,
+                "deskripsi" => $description,
+                "alt"   => $alt,
+                "image" => $txtImageName
+            ]);
+
+            if($wisataStore->save()){
+                $txtImage->move($destinationPath, $txtImageName);
+
+//                for($i=0;$i<count($request->tag_id);$i++){
+//                    $tag = new Tag([
+//                        "tag_id"    => Uuid::generate()->string,
+//                        "wisata_id"    => $postLastId,
+//                        "nama_tag"  => $request->tag_id[$i]
+//                    ]);
+//
+//                    $tag->save();
+//                }
+
+                Session::pull("sess_nama_wisata");
+                Session::pull("sess_city_id");
+                Session::pull("sess_address");
+                Session::pull("sess_phone");
+                Session::pull("sess_office_hours");
+                Session::pull("sess_timezone");
+                Session::pull("sess_website");
+                Session::pull("sess_company");
+                Session::pull("sess_desc");
+
+                return back()->with('success','Tourist Attraction created successfully');
+            }else{
+                return back()->with('error','Tourist Attraction failed created');
+            }
+
 
         }else{
             Session::put("sess_nama_wisata", $namaWisata);

@@ -136,6 +136,16 @@
                                     <input type="file" id="image" name="image">
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Tags</label>
+                                    <select id="tag_id" name="tag_id[]" class="form-control tag_id" required multiple="multiple">
+                                        <option value=""></option>
+                                        @foreach($tag as $v)
+                                            <option value="{{$v->nama_tag}}">{{$v->nama_tag}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                             </div>
                             <!-- /.box-body -->
 
