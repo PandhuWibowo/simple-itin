@@ -7,7 +7,8 @@ use App\Http\Models\ObjekWisata;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Tag;
-
+use Uuid;
+use Carbon\Carbon;
 class ObjekWisataController extends Controller
 {
     public function __construct()
@@ -46,7 +47,15 @@ class ObjekWisataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $namaWisata = ucwords(trim($request->nama_wisata));
+        $cityId = trim($request->city_id);
+        $address = ucfirst(trim($request->address));
+        $phone = trim($request->phone);
+        $officeHours = trim($request->office_hours);
+        $changeformatMysqlTime = Carbon::createFromFormat('h:i A', $officeHours);
+        $finalFormatTime = $changeformatMysqlTime->format("H:i:s");
+
+        echo $finalFormatTime;
     }
 
     /**
