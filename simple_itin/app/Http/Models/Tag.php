@@ -14,4 +14,8 @@ class Tag extends Model
     ];
 
     public $incrementing = false;
+
+    public function setDetailTag(){
+        return $this->hasMany(DetailTag::class, "tag_id", "tag_id");
+    }
 }

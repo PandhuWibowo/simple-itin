@@ -20,4 +20,8 @@ class ObjekWisata extends Model
     public function getKota(){
         return $this->belongsTo(Kota::class, "kota_id");
     }
+
+    public function setDetailTag(){
+        return $this->hasMany(DetailTag::class, "wisata_id", "wisata_id");
+    }
 }
