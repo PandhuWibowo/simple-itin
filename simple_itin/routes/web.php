@@ -44,6 +44,14 @@ Route::namespace("Dashboard")->group(function(){
             Route::post("store","JenisPenginapanController@store");
         });
 
+        //Bagian Dashboard Objek Wisata
+        Route::prefix("/tourist-attractions")->group(function(){
+            Route::get("/","ObjekWisataController@index");
+            Route::put("update","ObjekWisataController@update");
+            Route::delete("delete","ObjekWisataController@destroy");
+            Route::post("store","ObjekWisataController@store");
+        });
+
     });
 });
 //End
