@@ -21,6 +21,8 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{!! asset('asset_dashboard/dist/css/skins/_all-skins.min.css') !!}">
 
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="{!! asset('asset_dashboard/plugins/timepicker/bootstrap-timepicker.min.css') !!}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,15 +67,15 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" autocomplete="off" method="post" action="{{ url('/backend/tourist-attractions/store') }}" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="nama_wisata">Attraction Name</label>
-                                    <input type="text" class="form-control" id="nama_wisata" placeholder="Attraction Name" required>
+                                    <input type="text" class="form-control" id="nama_wisata" name="nama_wisata" placeholder="Attraction Name">
                                 </div>
                                 <div class="form-group">
                                     <label>City</label>
-                                    <select class="form-control select2" style="width: 100%;" id="city_id" required>
+                                    <select class="form-control select2" style="width: 100%;" id="city_id" name="city_id">
                                         <option></option>
                                         @foreach($kota as $row)
                                             <option value="{{$row->kota_id}}">{{$row->nama_kota}}</option>
@@ -82,28 +84,47 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="address" required></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="address" name="address"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <label for="exampleInputPassword1">Phone</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">File input</label>
-                                    <input type="file" id="exampleInputFile">
+                                    <label>Office Hours</label>
+                                    <input type="text" class="form-control timepicker" name="office_hours" id="office_hours">
+                                </div>
 
-                                    <p class="help-block">Example block-level help text here.</p>
+                                <div class="form-group">
+                                    <label>Timezone</label>
+                                    <select class="form-control select2" style="width: 100%;" id="timezone" name="timezone">
+                                        <option></option>
+                                        <option value="WIB">WIB</option>
+                                        <option value="WITA">WITA</option>
+                                        <option value="WIT">WIT</option>
+                                    </select>
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
+
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    <input type="text" class="form-control" id="website" name="website" placeholder="Website">
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="description" name="description"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Image</label>
+                                    <input type="file" id="image" name="image">
+                                </div>
+
                             </div>
                             <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-flat">Save</button>
                             </div>
                         </form>
                     </div>
@@ -151,12 +172,19 @@
 <script src="{!! asset('asset_dashboard/dist/js/pages/dashboard2.js') !!}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{!! asset('asset_dashboard/dist/js/demo.js') !!}"></script>
+
+<script src="{!! asset('asset_dashboard/plugins/timepicker/bootstrap-timepicker.min.js') !!}"></script>
 <script>
 $(function () {
     $('.select2').select2({
         placeholder : "Please select the city",
         allowClear: true
     });
+
+    //Timepicker
+    $('.timepicker').timepicker({
+        showInputs: false
+    })
 });
 </script>
 </body>
