@@ -92,7 +92,27 @@ class JenisPenginapanController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $jenisPenginapanId = trim($request->jenis_penginapan_id);
+        $namaJenisPenginapanId = ucfirst(trim($request->nama_jenis_penginapan));
+
+        $updateJenisPenginapan = JenisPenginapan::findOrFail($jenisPenginapanId);
+
+        $updateJenisPenginapan->nama_jenis_penginapan = $namaJenisPenginapanId;
+        if($updateJenisPenginapan->save()){
+            return response()->json(
+                array(
+                    "response"  => "success",
+                    "message"   => "Data has been updated"
+                )
+            );
+        }else{
+            return response()->json(
+                array(
+                    "response" => "error",
+                    "message"   => "Data failed to update"
+                )
+            );
+        }
     }
 
     /**
@@ -103,6 +123,23 @@ class JenisPenginapanController extends Controller
      */
     public function destroy(Request $request)
     {
-        //
+        $jenisPenginapanId = trim($request->id);
+
+        if(JenisPenginapan::where("jenis_penginapan_id", $jenisPenginapanId)->delete()){
+            return response()->json(
+                array(
+                    "response"  => "success",
+                    "message"   => "Data has been deleted"
+                )
+            );
+        }
+        else{
+            return response()->json(
+                array(
+                    "response"  => "error",
+                    "message"   => "Data failed to update"
+                )
+            );
+        }
     }
 }

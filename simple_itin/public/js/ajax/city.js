@@ -112,8 +112,6 @@ $("#btnUpdateCity").on("click", function (e) {
 });
 
 //Hapus Kota
-
-
 $("#example1").on("click", ".btnRemoveCity", function(){
     let varId = $(this).data("city_id");
 

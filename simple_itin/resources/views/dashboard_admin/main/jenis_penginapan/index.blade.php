@@ -94,10 +94,10 @@
                                         <td>{{$seq+1}}</td>
                                         <td>{{$row->nama_jenis_penginapan}}</td>
                                         <td>
-                                            <a class="btn btn-warning btn-md btn-flat btnEditCity" data-toggle="tooltip" title="Edit" data-jenis_penginapan_id="{{$row->jenis_penginapan_id}}" data-city="{{$row->nama_jenis_penginapan}}">
+                                            <a class="btn btn-warning btn-md btn-flat btnEditRoom" data-toggle="tooltip" title="Edit" data-jenis_penginapan_id="{{$row->jenis_penginapan_id}}" data-nama_jenis_penginapan="{{$row->nama_jenis_penginapan}}">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
-                                            <a class="btn btn-danger btn-md btn-flat btnRemoveCity" data-toggle="tooltip" title="Remove" data-jenis_penginapan_id="{{$row->jenis_penginapan_id}}">
+                                            <a class="btn btn-danger btn-md btn-flat btnRemoveRoom" data-toggle="tooltip" title="Remove" data-jenis_penginapan_id="{{$row->jenis_penginapan_id}}">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </td>
@@ -113,7 +113,7 @@
                                 </tfoot>
                             </table>
 
-                            @include("dashboard_admin.main.kota.edit_modal")
+                            @include("dashboard_admin.main.jenis_penginapan.edit_modal")
                         </div>
                         <!-- /.box-footer -->
                     </div>
