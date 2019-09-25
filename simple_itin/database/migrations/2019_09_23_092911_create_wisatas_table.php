@@ -16,6 +16,7 @@ class CreateWisatasTable extends Migration
         Schema::create('wisatas', function (Blueprint $table) {
             $table->uuid('wisata_id')->nullable(false)->primary();
             $table->string("nama_wisata", 150)->nullable();
+            $table->longText("slug")->nullable();
             $table->uuid("kota_id")->nullable();
             $table->text("alamat")->nullable();
             $table->string("kontak", 15)->nullable();
@@ -33,7 +34,7 @@ class CreateWisatasTable extends Migration
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->softDeletes();
 
-            $table->foreign("kota_id")->references("kota_id")->on("kotas");
+            $table->foreign("kota_id")->references("kota_id")->on("kotas")->onDelete("cascade");
         });
     }
 

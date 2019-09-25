@@ -21,8 +21,8 @@ class CreateDetailPenginapansTable extends Migration
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->softDeletes();
 
-            $table->foreign("penginapan_id")->references("penginapan_id")->on("penginapans");
-            $table->foreign("jenis_penginapan_id")->references("jenis_penginapan_id")->on("jenis_penginapans");
+            $table->foreign("penginapan_id")->references("penginapan_id")->on("penginapans")->onDelete('cascade');
+            $table->foreign("jenis_penginapan_id")->references("jenis_penginapan_id")->on("jenis_penginapans")->onDelete('cascade');
         });
     }
 

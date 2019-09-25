@@ -16,6 +16,7 @@ class CreateKotasTable extends Migration
         Schema::create('kotas', function (Blueprint $table) {
             $table->uuid('kota_id')->primary()->nullable(false);
             $table->string("nama_kota", 100)->nullable();
+            $table->longText("slug")->nullable();
             $table->string("kode_kota", 10)->nullable();
 //            $table->timestamps();
 

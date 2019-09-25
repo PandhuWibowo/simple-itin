@@ -15,7 +15,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview menu-open">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
@@ -36,6 +36,12 @@
             <li>
                 <a href="{{ url('/backend/accomodation-types') }}">
                     <i class="fa fa-bed" aria-hidden="true"></i> <span>Room Types</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url('/backend/tourist-attractions') }}">
+                    <i class="fa fa-globe" aria-hidden="true"></i> <span>Tourist Attraction</span>
                 </a>
             </li>
 {{--            <li class="treeview">--}}

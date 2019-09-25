@@ -22,8 +22,8 @@ class CreateDetailTagsTable extends Migration
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->softDeletes();
 
-            $table->foreign("tag_id")->references("tag_id")->on("tags");
-            $table->foreign("wisata_id")->references("wisata_id")->on("wisatas");
+            $table->foreign("tag_id")->references("tag_id")->on("tags")->onDelete('cascade');
+            $table->foreign("wisata_id")->references("wisata_id")->on("wisatas")->onDelete('cascade');
         });
     }
 

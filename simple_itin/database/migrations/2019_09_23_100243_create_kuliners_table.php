@@ -17,6 +17,7 @@ class CreateKulinersTable extends Migration
             $table->uuid('kuliner_id')->nullable(false)->primary();
 //            $table->timestamps();
             $table->string("nama_kuliner", 150)->nullable(false);
+            $table->longText("slug")->nullable();
             $table->uuid("kota_id");
             $table->time("waktu_operasional")->nullable();
             $table->enum("waktu_bagian", ['WIB','WIT','WITA'])->default('WIB');
@@ -30,7 +31,7 @@ class CreateKulinersTable extends Migration
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->softDeletes();
 
-            $table->foreign("kota_id")->references("kota_id")->on("kotas");
+            $table->foreign("kota_id")->references("kota_id")->on("kotas")->onDelete('cascade');
         });
     }
 
