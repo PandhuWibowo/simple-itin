@@ -71,48 +71,53 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="nama_wisata">Attraction Name</label>
-                                    <input type="text" class="form-control" id="nama_wisata" name="nama_wisata" placeholder="Attraction Name">
+                                    <input type="text" class="form-control" id="nama_wisata" name="nama_wisata" placeholder="Attraction Name" value="{{Session::get("sess_nama_wisata")}}">
                                 </div>
                                 <div class="form-group">
                                     <label>City</label>
                                     <select class="form-control select2" style="width: 100%;" id="city_id" name="city_id">
                                         <option></option>
                                         @foreach($kota as $row)
-                                            <option value="{{$row->kota_id}}">{{$row->nama_kota}}</option>
+                                            <option value="{{$row->kota_id}}" <?php echo (Session::get("sess_city_id") == $row->kota_id) ? "selected" : "";?>>{{$row->nama_kota}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="address" name="address"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="address" name="address">{{Session::get("sess_address")}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Phone</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone">
+                                    <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" value="{{Session::get('sess_phone')}}">
                                 </div>
                                 <div class="form-group">
                                     <label>Office Hours</label>
-                                    <input type="text" class="form-control timepicker" name="office_hours" id="office_hours">
+                                    <input type="text" class="form-control timepicker" name="office_hours" id="office_hours" value="{{Session::get("sess_office_hours")}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Timezone</label>
                                     <select class="form-control select2" style="width: 100%;" id="timezone" name="timezone">
                                         <option></option>
-                                        <option value="WIB">WIB</option>
-                                        <option value="WITA">WITA</option>
-                                        <option value="WIT">WIT</option>
+                                        <option value="WIB" <?php echo (Session::get("sess_timezone") == "WIB") ? "selected" : "";?>>WIB</option>
+                                        <option value="WITA" <?php echo (Session::get("sess_timezone") == "WITA") ? "selected" : "";?>>WITA</option>
+                                        <option value="WIT" <?php echo (Session::get("sess_timezone") == "WIT") ? "selected" : "";?>>WIT</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="text" class="form-control" id="website" name="website" placeholder="Website">
+                                    <label for="website">Website <span>(http or https is required)</span></label>
+                                    <input type="text" class="form-control" id="website" name="website" placeholder="Website" value="{{Session::get('sess_website')}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company">Company</label>
+                                    <input type="text" class="form-control" id="company" name="company" placeholder="Company" value="{{Session::get("sess_company")}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="description" name="description"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="description" name="description">{{Session::get('sess_desc')}}</textarea>
                                 </div>
 
                                 <div class="form-group">
