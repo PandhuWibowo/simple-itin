@@ -39,7 +39,7 @@ class ObjekWisataController extends Controller
     public function create()
     {
         $kota = Kota::orderBy("nama_kota", "asc")->get();
-        $tag = Tag::orderBy("nama_tag", "asc")->get();
+        $tag = Tag::orderBy("nama_tag", "asc")->distinct()->get(['nama_tag']);
         return view("dashboard_admin.main.objek_wisata.add_objek_wisata", compact("kota", "tag"));
     }
 
@@ -51,55 +51,54 @@ class ObjekWisataController extends Controller
      */
     public function store(Request $request)
     {
-//        $namaWisata = ucwords(trim($request->nama_wisata));
-//        $cityId = trim($request->city_id);
-//        $address = ucfirst(trim($request->address));
-//        $phone = trim($request->phone);
-//        $officeHours = trim($request->office_hours);
-//        $changeformatMysqlTime = Carbon::createFromFormat('h:i A', $officeHours);
-//        $finalFormatTime = $changeformatMysqlTime->format("H:i:s");
-//
-//        $timezone = ucwords(trim($request->timezone));
-//        $website = strtolower(trim($request->website));
-//        $company = ucwords(trim($request->company));
-//
-//        $description = ucfirst(trim($request->description));
-//        $alt = $company;
-//        $slug = Str::slug($namaWisata);
-//
-//        if($request->hasFile("image")){
-//            request()->validate([
-//                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-//            ]);
-//            $txtImage     = $request->file("image");
-//            $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
-//
-//            $destinationPath = public_path('image/wisata');
-//            $img = Image::make($txtImage->getRealPath());
-//            $img->resize(100, 100, function ($constraint) {
-//                $constraint->aspectRatio();
-//            })->save($destinationPath.'/'.$txtImageName);
-//
-//            $wisataStore = new ObjekWisata([
-//                "wisata_id" => Uuid::generate()->string,
-//                "nama_wisata" => $namaWisata,
-//                "slug"  => $slug,
-//                "kota_id"   => $cityId,
-//                "alamat" => $address,
-//                "kontak"    => $phone,
-//                "waktu_operasional" => $finalFormatTime,
-//                "waktu_bagian"  => $timezone,
-//                "website"   => $website,
-//                "deskripsi" => $description,
-//                "alt"   => $alt,
-//                "image" => $txtImageName
-//            ]);
-//
-//            $wisataLastId = $wisataStore->wisata_id;
-//
-//            if($wisataStore->save()){
-//                $txtImage->move($destinationPath, $txtImageName);
-//
+        $namaWisata = ucwords(trim($request->nama_wisata));
+        $cityId = trim($request->city_id);
+        $address = ucfirst(trim($request->address));
+        $phone = trim($request->phone);
+        $officeHours = trim($request->office_hours);
+        $changeformatMysqlTime = Carbon::createFromFormat('h:i A', $officeHours);
+        $finalFormatTime = $changeformatMysqlTime->format("H:i:s");
+
+        $timezone = ucwords(trim($request->timezone));
+        $website = strtolower(trim($request->website));
+        $company = ucwords(trim($request->company));
+
+        $description = ucfirst(trim($request->description));
+        $alt = $company;
+        $slug = Str::slug($namaWisata);
+
+        if($request->hasFile("image")){
+            request()->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $txtImage     = $request->file("image");
+            $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
+
+            $destinationPath = public_path('image/wisata');
+            $img = Image::make($txtImage->getRealPath());
+            $img->resize(100, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$txtImageName);
+
+            $wisataStore = new ObjekWisata([
+                "wisata_id" => Uuid::generate()->string,
+                "nama_wisata" => $namaWisata,
+                "slug"  => $slug,
+                "kota_id"   => $cityId,
+                "alamat" => $address,
+                "kontak"    => $phone,
+                "waktu_operasional" => $finalFormatTime,
+                "waktu_bagian"  => $timezone,
+                "website"   => $website,
+                "deskripsi" => $description,
+                "alt"   => $alt,
+                "image" => $txtImageName
+            ]);
+
+            if($wisataStore->save()){
+                $wisataLastId = trim($wisataStore->wisata_id);
+                $txtImage->move($destinationPath, $txtImageName);
+
                 for($i=0;$i<count($request->tag_id);$i++){
 //                    $tag = new DetailTag([
 //                        "tag_id"    => $request->tag_id[$i],
@@ -114,42 +113,55 @@ class ObjekWisataController extends Controller
                             "nama_tag" => $request->tag_id[$i]
                         ]);
 
-                        $tags->save();
-                    }else{
+                        if($tags->save()){
+                            $tagLastId = trim($tags->tag_id);
 
+                            $detailTagStore = new DetailTag([
+                                "tag_id"  => $tagLastId,
+                                "wisata_id"  => $wisataLastId
+                            ]);
+
+                            $detailTagStore->save();
+                        }
+                    }else{
+                        $tagTaken = Tag::select("tag_id")->where("nama_tag", $request->tag_id[$i])->first();
+                        $detailTagStore = new DetailTag([
+                            "tag_id"  => $tagTaken->tag_id,
+                            "wisata_id"  => $wisataLastId
+                        ]);
+
+                        $detailTagStore->save();
                     }
                 }
-//
-//                Session::pull("sess_nama_wisata");
-//                Session::pull("sess_city_id");
-//                Session::pull("sess_address");
-//                Session::pull("sess_phone");
-//                Session::pull("sess_office_hours");
-//                Session::pull("sess_timezone");
-//                Session::pull("sess_website");
-//                Session::pull("sess_company");
-//                Session::pull("sess_desc");
-//
-//                return back()->with('success','Tourist Attraction created successfully');
-//            }else{
-//                return back()->with('error','Tourist Attraction failed created');
-//            }
-//
-//        }else{
-//            Session::put("sess_nama_wisata", $namaWisata);
-//            Session::put("sess_city_id", $cityId);
-//            Session::put("sess_address", $address);
-//            Session::put("sess_phone", $phone);
-//            Session::put("sess_office_hours", $officeHours);
-//            Session::put("sess_timezone", $timezone);
-//            Session::put("sess_website", $website);
-//            Session::put("sess_company", $company);
-//            Session::put("sess_desc", $description);
-//
-//            return back()->with('error','There is no image');
-//        }
 
+                Session::pull("sess_nama_wisata");
+                Session::pull("sess_city_id");
+                Session::pull("sess_address");
+                Session::pull("sess_phone");
+                Session::pull("sess_office_hours");
+                Session::pull("sess_timezone");
+                Session::pull("sess_website");
+                Session::pull("sess_company");
+                Session::pull("sess_desc");
 
+                return back()->with('success','Tourist Attraction created successfully');
+            }else{
+                return back()->with('error','Tourist Attraction failed created');
+            }
+
+        }else{
+            Session::put("sess_nama_wisata", $namaWisata);
+            Session::put("sess_city_id", $cityId);
+            Session::put("sess_address", $address);
+            Session::put("sess_phone", $phone);
+            Session::put("sess_office_hours", $officeHours);
+            Session::put("sess_timezone", $timezone);
+            Session::put("sess_website", $website);
+            Session::put("sess_company", $company);
+            Session::put("sess_desc", $description);
+
+            return back()->with('error','There is no image');
+        }
     }
 
     /**

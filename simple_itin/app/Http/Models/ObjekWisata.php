@@ -14,7 +14,7 @@ class ObjekWisata extends Model
         "wisata_id", "nama_wisata", "slug", "kota_id", "alamat", "kontak", "waktu_operasional", "waktu_bagian", "website", "deskripsi", "image", "alt", "is_approved", "url"
     ];
 
-    public $incrementing = "false";
+    public $incrementing = false;
 
     //Relasi ke Kota - Minta Kota Id ke table kotas
     public function getKota(){
