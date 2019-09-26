@@ -196,9 +196,47 @@ class ObjekWisataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $wisataId = trim($request->wisata_id);
+        $namaWisata = ucwords(trim($request->nama_wisata));
+        $cityId = trim($request->city_id);
+        $address = ucfirst(trim($request->address));
+        $phone = trim($request->phone);
+        $officeHours = trim($request->office_hours);
+        $changeformatMysqlTime = Carbon::createFromFormat('h:i A', $officeHours);
+        $finalFormatTime = $changeformatMysqlTime->format("H:i:s");
+
+        $timezone = ucwords(trim($request->timezone));
+        $website = strtolower(trim($request->website));
+        $company = ucwords(trim($request->company));
+
+        $description = ucfirst(trim($request->description));
+        $alt = $company;
+        $slug = Str::slug($namaWisata);
+
+        if($request->hasFile("image")){
+
+        }else{
+            $updateWisata = ObjekWisata::findOrFail($wisataId);
+            $updateWisata->nama_wisata = $namaWisata;
+            $updateWisata->slug = $slug;
+            $updateWisata->kota_id = $cityId;
+            $updateWisata->alamat = $address;
+            $updateWisata->kontak = $phone;
+            $updateWisata->waktu_operasional = $finalFormatTime;
+            $updateWisata->waktu_bagian = $timezone;
+            $updateWisata->website = $website;
+            $updateWisata->deskripsi = $description;
+            $updateWisata->alt = $company;
+
+            if($updateWisata->save()){
+                return back()->with('success','Tourist Attraction created successfully');
+            }else{
+                return back()->with('error','Tourist Attraction failed created');
+            }
+        }
     }
 
     /**

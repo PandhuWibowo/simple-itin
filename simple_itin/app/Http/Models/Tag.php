@@ -21,6 +21,6 @@ class Tag extends Model
 
     public function getObjekWisata()
     {
-        return $this->belongsToMany(ObjekWisata::class);
+        return $this->belongsToMany(ObjekWisata::class, "wisata_tags", "tag_id", "wisata_id");
     }
 }

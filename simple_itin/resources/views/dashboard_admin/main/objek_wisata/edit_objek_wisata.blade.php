@@ -67,8 +67,8 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" autocomplete="off" method="post" action="{{ url('/backend/tourist-attractions/store') }}" enctype="multipart/form-data">
-
+                        <form role="form" autocomplete="off" method="post" action="{{ url('/backend/tourist-attractions/update') }}" enctype="multipart/form-data">
+                            {{method_field('PUT')}}
                             <div class="box-body">
                                 @include("dashboard_admin.include.flash-message")
                                 @if ($errors->any())
