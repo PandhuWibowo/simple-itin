@@ -198,6 +198,17 @@ class ObjekWisataController extends Controller
      */
     public function update(Request $request)
     {
+        request()->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $txtImage     = $request->file("image");
+        $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
+
+        $destinationPath = public_path('image/wisata');
+        $img = Image::make($txtImage->getRealPath());
+        $img->resize(100, 100, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$txtImageName);
 
         $wisataId = trim($request->wisata_id);
         $namaWisata = ucwords(trim($request->nama_wisata));
@@ -217,7 +228,55 @@ class ObjekWisataController extends Controller
         $slug = Str::slug($namaWisata);
 
         if($request->hasFile("image")){
+            $updateWisata = ObjekWisata::findOrFail($wisataId);
+            $updateWisata->nama_wisata = $namaWisata;
+            $updateWisata->slug = $slug;
+            $updateWisata->kota_id = $cityId;
+            $updateWisata->alamat = $address;
+            $updateWisata->kontak = $phone;
+            $updateWisata->waktu_operasional = $finalFormatTime;
+            $updateWisata->waktu_bagian = $timezone;
+            $updateWisata->website = $website;
+            $updateWisata->deskripsi = $description;
+            $updateWisata->alt = $company;
+            $updateWisata->image = $txtImageName;
 
+            if($updateWisata->save()){
+                $txtImage->move($destinationPath, $txtImageName);
+                $deleteTag = DetailTag::where("wisata_id", $wisataId)->delete();
+
+                for($i=0;$i<count($request->tag_id);$i++){
+                    $checkTag = Tag::where("nama_tag", $request->tag_id[$i])->get()->count();
+                    if($checkTag == 0 || $checkTag == "0"){
+                        $tags = new Tag([
+                            "tag_id"    => Uuid::generate()->string,
+                            "nama_tag" => $request->tag_id[$i]
+                        ]);
+
+                        if($tags->save()){
+                            $tagLastId = trim($tags->tag_id);
+
+                            $detailTagStore = new DetailTag([
+                                "tag_id"  => $tagLastId,
+                                "wisata_id"  => $wisataId
+                            ]);
+
+                            $detailTagStore->save();
+                        }
+                    }else{
+                        $tagTaken = Tag::select("tag_id")->where("nama_tag", $request->tag_id[$i])->first();
+                        $detailTagStore = new DetailTag([
+                            "tag_id"  => $tagTaken->tag_id,
+                            "wisata_id"  => $wisataId
+                        ]);
+
+                        $detailTagStore->save();
+                    }
+                }
+                return back()->with('success','Tourist Attraction created successfully');
+            }else{
+                return back()->with('error','Tourist Attraction failed created');
+            }
         }else{
             $updateWisata = ObjekWisata::findOrFail($wisataId);
             $updateWisata->nama_wisata = $namaWisata;
