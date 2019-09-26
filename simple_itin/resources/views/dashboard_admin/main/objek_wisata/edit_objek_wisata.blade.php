@@ -142,7 +142,7 @@
                                     <select id="tag_id" name="tag_id[]" class="form-control tag_id" required multiple="multiple">
                                         <option value=""></option>
                                         @foreach($tag as $v)
-                                            <option value="{{$v->nama_tag}}">{{$v->nama_tag}}</option>
+                                            <option value="{{$v->nama_tag}}" @foreach($editWisata->getTag as $row) @if($v->nama_tag == $row->nama_tag) selected @endif @endforeach>{{$v->nama_tag}}</option>
                                         @endforeach
                                     </select>
                                 </div>

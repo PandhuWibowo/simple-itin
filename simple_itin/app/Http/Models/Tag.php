@@ -15,7 +15,12 @@ class Tag extends Model
 
     public $incrementing = false;
 
-    public function setDetailTag(){
-        return $this->hasMany(DetailTag::class, "tag_id", "tag_id");
+//    public function setDetailTag(){
+//        return $this->hasMany(DetailTag::class, "tag_id", "tag_id");
+//    }
+
+    public function getObjekWisata()
+    {
+        return $this->belongsToMany(ObjekWisata::class);
     }
 }
