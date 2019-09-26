@@ -57,9 +57,8 @@
 
             <hr>
 
-            <a class="btn btn-primary btn-flat btn-md" href="{{ url("backend/tourist-attractions/create") }}">
+            <a data-toggle="tooltip" title="Add New" class="btn btn-primary btn-flat btn-md" href="{{ url("backend/tourist-attractions/create") }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                Add New
             </a>
 
         </section>

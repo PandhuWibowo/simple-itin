@@ -57,9 +57,8 @@
 
             <hr>
 
-            <button class="btn btn-primary btn-flat btn-md" data-toggle="modal" data-target="#addModalRoom">
+            <button data-toggle="tooltip" title="Add New" class="btn btn-primary btn-flat btn-md" data-toggle="modal" data-target="#addModalRoom">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                Add New
             </button>
 
             @include("dashboard_admin.main.jenis_penginapan.add_modal")

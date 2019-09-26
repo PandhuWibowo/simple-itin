@@ -57,9 +57,8 @@
 
             <hr>
 
-            <button class="btn btn-primary btn-flat btn-md" data-toggle="modal" data-target="#addModalCity">
+            <button data-toggle="tooltip" title="Add New" class="btn btn-primary btn-flat btn-md" data-toggle="modal" data-target="#addModalCity">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                Add New
             </button>
 
             @include("dashboard_admin.main.kota.add_modal")
