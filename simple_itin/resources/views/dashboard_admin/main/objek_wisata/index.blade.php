@@ -98,7 +98,7 @@
                                             <a class="btn btn-warning btn-md btn-flat btnEditWisata" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
-                                            <a class="btn btn-danger btn-md btn-flat btnRemoveWisata" data-toggle="tooltip" title="Remove">
+                                            <a class="btn btn-danger btn-md btn-flat btnRemoveWisata" data-toggle="tooltip" title="Remove" data-wisata_id="{{$row->wisata_id}}">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </td>

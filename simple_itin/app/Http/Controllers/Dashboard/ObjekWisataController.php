@@ -204,8 +204,25 @@ class ObjekWisataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $wisataId = trim($request->wisata_id);
+
+        if(ObjekWisata::where("wisata_id", $wisataId)->delete()){
+            DetailTag::where("wisata_id", $wisataId)->delete();
+            return response()->json(
+                array(
+                    "response"  => "success",
+                    "message"   => "Data has been removed"
+                )
+            );
+        }else{
+            return response()->json(
+                array(
+                    "response"  => "error",
+                    "message"   => "Data failed to remove"
+                )
+            );
+        }
     }
 }

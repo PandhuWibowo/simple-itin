@@ -112,7 +112,7 @@ $("#btnUpdateRoom").on("click", function (e) {
     }
 });
 
-//Hapus Kota
+//Hapus Room
 $("#example1").on("click", ".btnRemoveRoom", function(){
     let varId = $(this).data("jenis_penginapan_id");
 
