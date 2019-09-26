@@ -54,6 +54,16 @@ Route::namespace("Dashboard")->group(function(){
             Route::post("store","ObjekWisataController@store");
         });
 
+        //Bagian Dashboard Objek Wisata
+        Route::prefix("/inn")->group(function(){
+            Route::get("/","PenginapanController@index");
+            Route::get("/create","PenginapanController@create");
+            Route::get("/{penginapan}/edit","PenginapanController@edit");
+            Route::put("update","PenginapanController@update");
+            Route::delete("delete","PenginapanController@destroy");
+            Route::post("store","PenginapanController@store");
+        });
+
     });
 });
 //End
