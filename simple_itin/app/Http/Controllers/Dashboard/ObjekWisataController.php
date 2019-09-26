@@ -232,6 +232,36 @@ class ObjekWisataController extends Controller
             $updateWisata->alt = $company;
 
             if($updateWisata->save()){
+                $deleteTag = DetailTag::where("wisata_id", $wisataId)->delete();
+
+                for($i=0;$i<count($request->tag_id);$i++){
+                    $checkTag = Tag::where("nama_tag", $request->tag_id[$i])->get()->count();
+                    if($checkTag == 0 || $checkTag == "0"){
+                        $tags = new Tag([
+                            "tag_id"    => Uuid::generate()->string,
+                            "nama_tag" => $request->tag_id[$i]
+                        ]);
+
+                        if($tags->save()){
+                            $tagLastId = trim($tags->tag_id);
+
+                            $detailTagStore = new DetailTag([
+                                "tag_id"  => $tagLastId,
+                                "wisata_id"  => $wisataId
+                            ]);
+
+                            $detailTagStore->save();
+                        }
+                    }else{
+                        $tagTaken = Tag::select("tag_id")->where("nama_tag", $request->tag_id[$i])->first();
+                        $detailTagStore = new DetailTag([
+                            "tag_id"  => $tagTaken->tag_id,
+                            "wisata_id"  => $wisataId
+                        ]);
+
+                        $detailTagStore->save();
+                    }
+                }
                 return back()->with('success','Tourist Attraction created successfully');
             }else{
                 return back()->with('error','Tourist Attraction failed created');

@@ -3,11 +3,11 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DetailTag extends Model
 {
-    use SoftDeletes;
+//    use SoftDeletes;
     protected $table = "wisata_tags";
     protected $fillable = [
         "tag_id", "wisata_id"
