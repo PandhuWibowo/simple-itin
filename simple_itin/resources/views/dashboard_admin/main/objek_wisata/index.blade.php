@@ -94,7 +94,7 @@
                                         <td>{{$row->nama_wisata}}</td>
                                         <td>{{$row->getKota->nama_kota}}</td>
                                         <td>
-                                            <a class="btn btn-warning btn-md btn-flat btnEditWisata" data-toggle="tooltip" title="Edit">
+                                            <a href="{{ url('backend/tourist-attractions/'.$row->wisata_id.'/edit') }}" class="btn btn-warning btn-md btn-flat btnEditWisata" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
                                             <a class="btn btn-danger btn-md btn-flat btnRemoveWisata" data-toggle="tooltip" title="Remove" data-wisata_id="{{$row->wisata_id}}">

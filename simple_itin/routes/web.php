@@ -48,6 +48,7 @@ Route::namespace("Dashboard")->group(function(){
         Route::prefix("/tourist-attractions")->group(function(){
             Route::get("/","ObjekWisataController@index");
             Route::get("/create","ObjekWisataController@create");
+            Route::get("/{objek_wisata}/edit","ObjekWisataController@edit");
             Route::put("update","ObjekWisataController@update");
             Route::delete("delete","ObjekWisataController@destroy");
             Route::post("store","ObjekWisataController@store");

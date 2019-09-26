@@ -181,9 +181,12 @@ class ObjekWisataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($objek_wisata)
     {
-        //
+        $kota = Kota::orderBy("nama_kota", "asc")->get();
+        $tag = Tag::orderBy("nama_tag", "asc")->distinct()->get(['nama_tag']);
+        $editWisata = ObjekWisata::where("wisata_id", $objek_wisata)->first();
+        return view("dashboard_admin.main.objek_wisata.edit_objek_wisata", compact("kota", "tag", "editWisata"));
     }
 
     /**
