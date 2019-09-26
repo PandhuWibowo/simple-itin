@@ -14,4 +14,8 @@ class JenisPenginapan extends Model
     ];
 
     public $incrementing = false;
+
+    public function getPenginapan(){
+        return $this->belongsToMany(Penginapan::class, "penginapan_jenispenginapans", "jenis_penginapan_id", "penginapan_id");
+    }
 }
