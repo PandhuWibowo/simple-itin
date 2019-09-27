@@ -198,18 +198,6 @@ class ObjekWisataController extends Controller
      */
     public function update(Request $request)
     {
-        request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $txtImage     = $request->file("image");
-        $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
-
-        $destinationPath = public_path('image/wisata');
-        $img = Image::make($txtImage->getRealPath());
-        $img->resize(100, 100, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$txtImageName);
-
         $wisataId = trim($request->wisata_id);
         $namaWisata = ucwords(trim($request->nama_wisata));
         $cityId = trim($request->city_id);
@@ -228,6 +216,18 @@ class ObjekWisataController extends Controller
         $slug = Str::slug($namaWisata);
 
         if($request->hasFile("image")){
+            request()->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $txtImage     = $request->file("image");
+            $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
+
+            $destinationPath = public_path('image/wisata');
+            $img = Image::make($txtImage->getRealPath());
+            $img->resize(100, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$txtImageName);
+
             $updateWisata = ObjekWisata::findOrFail($wisataId);
             $updateWisata->nama_wisata = $namaWisata;
             $updateWisata->slug = $slug;

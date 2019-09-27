@@ -34,21 +34,18 @@ class PenginapanController extends Controller
     }
 
     public function edit($penginapan){
-
+        $jenisPenginapan = JenisPenginapan::orderBy("nama_jenis_penginapan","asc")->get();
+        $kota = Kota::orderBy("nama_kota", "asc")->get();
+        $editPenginapan = Penginapan::where("penginapan_id", $penginapan)->first();
+        return view("dashboard_admin.main.penginapan.edit_penginapan", compact("jenisPenginapan", "kota", "editPenginapan"));
     }
 
     public function store(Request $request){
         $namaPenginapan = ucwords(trim($request->nama_penginapan));
         $cityId = trim($request->city_id);
         $address = ucfirst(trim($request->address));
-        $phone = trim($request->phone);
-
-        $timezone = ucwords(trim($request->timezone));
-        $website = strtolower(trim($request->website));
-        $company = ucwords(trim($request->company));
 
         $description = ucfirst(trim($request->description));
-        $alt = $company;
         $slug = Str::slug($namaPenginapan);
 
         if($request->hasFile("image")){
@@ -70,10 +67,7 @@ class PenginapanController extends Controller
                 "slug"  => $slug,
                 "kota_id"   => $cityId,
                 "alamat" => $address,
-                "kontak"    => $phone,
-                "website"   => $website,
                 "deskripsi" => $description,
-                "alt"   => $alt,
                 "image" => $txtImageName
             ]);
 
@@ -107,17 +101,83 @@ class PenginapanController extends Controller
             Session::put("sess_nama_penginapan", $namaPenginapan);
             Session::put("sess_city_id", $cityId);
             Session::put("sess_address", $address);
-            Session::put("sess_phone", $phone);
-            Session::put("sess_website", $website);
-            Session::put("sess_company", $company);
             Session::put("sess_desc", $description);
 
             return back()->with('error','There is no image');
         }
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
+        $penginapanId = trim($request->penginapan_id);
+        $namaPenginapan = ucwords(trim($request->nama_penginapan));
+        $cityId = trim($request->city_id);
+        $address = ucfirst(trim($request->address));
+        $description = ucfirst(trim($request->description));
+        $slug = Str::slug($namaPenginapan);
 
+        if($request->hasFile("image")){
+            request()->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $txtImage     = $request->file("image");
+            $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
+
+            $destinationPath = public_path('image/wisata');
+            $img = Image::make($txtImage->getRealPath());
+            $img->resize(100, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$txtImageName);
+
+            $updatePenginapan = Penginapan::findOrFail($penginapanId);
+            $updatePenginapan->nama_penginapan = $namaPenginapan;
+            $updatePenginapan->slug = $slug;
+            $updatePenginapan->kota_id = $cityId;
+            $updatePenginapan->alamat = $address;
+            $updatePenginapan->deskripsi = $description;
+            $updatePenginapan->image = $txtImageName;
+
+            if($updatePenginapan->save()){
+                $txtImage->move($destinationPath, $txtImageName);
+                DetailPenginapan::where("penginapan_id", $penginapanId)->delete();
+
+                for($i=0;$i<count($request->jenis_penginapan_id);$i++){
+                    $detailPenginapan = new DetailPenginapan([
+                        "jenis_penginapan_id"  => $request->jenis_penginapan_id[$i],
+                        "penginapan_id"  => $penginapanId
+                    ]);
+
+                    $detailPenginapan->save();
+                }
+                return back()->with('success','Inn created successfully');
+            }else{
+                return back()->with('error','Inn failed created');
+            }
+        }else{
+            $updatePenginapan = Penginapan::findOrFail($penginapanId);
+            $updatePenginapan->nama_penginapan = $namaPenginapan;
+            $updatePenginapan->slug = $slug;
+            $updatePenginapan->kota_id = $cityId;
+            $updatePenginapan->alamat = $address;
+            $updatePenginapan->deskripsi = $description;
+
+            if($updatePenginapan->save()){
+                DetailPenginapan::where("penginapan_id", $penginapanId)->delete();
+
+                for($i=0;$i<count($request->jenis_penginapan_id);$i++){
+                    $detailPenginapan = new DetailPenginapan([
+                        "jenis_penginapan_id"  => $request->jenis_penginapan_id[$i],
+                        "penginapan_id"  => $penginapanId
+                    ]);
+
+                    $detailPenginapan->save();
+                }
+                return back()->with('success','Inn created successfully');
+            }else{
+                return back()->with('error','Inn failed created');
+            }
+        }
     }
 
     public function destroy(Request $request)

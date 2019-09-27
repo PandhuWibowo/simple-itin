@@ -97,20 +97,6 @@
                                     <label>Address</label>
                                     <textarea class="form-control" rows="3" placeholder="Enter ..." id="address" name="address">{{Session::get("sess_address")}}</textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Phone</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" value="{{Session::get('sess_phone')}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="website">Website <span>(http or https is required)</span></label>
-                                    <input type="text" class="form-control" id="website" name="website" placeholder="Website" value="{{Session::get('sess_website')}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="company">Company</label>
-                                    <input type="text" class="form-control" id="company" name="company" placeholder="Company" value="{{Session::get("sess_company")}}">
-                                </div>
 
                                 <div class="form-group">
                                     <label>Description</label>
