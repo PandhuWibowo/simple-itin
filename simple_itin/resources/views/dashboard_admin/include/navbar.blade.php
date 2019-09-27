@@ -50,6 +50,12 @@
                     <i class="fa fa-h-square" aria-hidden="true"></i> <span>Inn</span>
                 </a>
             </li>
+
+            <li>
+                <a href="{{ url('/backend/culinaries') }}">
+                    <i class="fa fa-cutlery" aria-hidden="true"></i> <span>Culinary</span>
+                </a>
+            </li>
 {{--            <li class="treeview">--}}
 {{--                <a href="#">--}}
 {{--                    <i class="fa fa-pie-chart"></i>--}}

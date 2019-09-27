@@ -54,7 +54,7 @@ Route::namespace("Dashboard")->group(function(){
             Route::post("store","ObjekWisataController@store");
         });
 
-        //Bagian Dashboard Objek Wisata
+        //Bagian Dashboard Tempat Penginapan
         Route::prefix("/inn")->group(function(){
             Route::get("/","PenginapanController@index");
             Route::get("/create","PenginapanController@create");
@@ -64,6 +64,15 @@ Route::namespace("Dashboard")->group(function(){
             Route::post("store","PenginapanController@store");
         });
 
+        //Bagian Dashboard Tempat Penginapan
+        Route::prefix("/culinaries")->group(function(){
+            Route::get("/","KulinerController@index");
+            Route::get("/create","KulinerController@create");
+            Route::get("/{kuliner}/edit","KulinerController@edit");
+            Route::put("update","KulinerController@update");
+            Route::delete("delete","KulinerController@destroy");
+            Route::post("store","KulinerController@store");
+        });
     });
 });
 //End
