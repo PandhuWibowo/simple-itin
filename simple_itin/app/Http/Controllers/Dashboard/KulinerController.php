@@ -104,7 +104,7 @@ class KulinerController extends Controller
             $txtImage     = $request->file("image");
             $txtImageName = "Thumb-".time().'.'.$txtImage->getClientOriginalExtension();
 
-            $destinationPath = public_path('image/wisata');
+            $destinationPath = public_path('image/kuliner');
             $img = Image::make($txtImage->getRealPath());
             $img->resize(100, 100, function ($constraint) {
                 $constraint->aspectRatio();
