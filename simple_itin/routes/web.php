@@ -14,9 +14,9 @@ Route::get('/clear-cache', function() {
 });
 
 //Index
-Route::get("/", function(){
-    return redirect("login");
-});
+//Route::get("/", function(){
+//    return redirect("login");
+//});
 //Segala macam auth disini
 Auth::routes();
 
@@ -25,6 +25,9 @@ Auth::routes();
 //Start
 Route::get('/backend/home', 'HomeController@index');
 
+Route::namespace("Portal")->group(function(){
+    Route::get("/","HomeController@index");
+});
 Route::namespace("Dashboard")->group(function(){
     Route::prefix("/backend")->group(function (){
 
