@@ -22,5 +22,6 @@ class VerifyCsrfToken extends Middleware
         'backend/cities/*',
         'backend/accomodation-types/*',
         'backend/tourist-attractions/*',
+        'backend/inn/*',
     ];
 }

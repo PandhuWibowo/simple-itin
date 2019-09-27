@@ -44,6 +44,12 @@
                     <i class="fa fa-globe" aria-hidden="true"></i> <span>Tourist Attraction</span>
                 </a>
             </li>
+
+            <li>
+                <a href="{{ url('/backend/inn') }}">
+                    <i class="fa fa-h-square" aria-hidden="true"></i> <span>Inn</span>
+                </a>
+            </li>
 {{--            <li class="treeview">--}}
 {{--                <a href="#">--}}
 {{--                    <i class="fa fa-pie-chart"></i>--}}

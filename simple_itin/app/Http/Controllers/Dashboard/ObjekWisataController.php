@@ -27,7 +27,7 @@ class ObjekWisataController extends Controller
      */
     public function index()
     {
-        $objekWisata = ObjekWisata::orderBy("nama_wisata")->get();
+        $objekWisata = ObjekWisata::orderBy("nama_wisata", "asc")->get();
         return view("dashboard_admin.main.objek_wisata.index", compact("objekWisata"));
     }
 
