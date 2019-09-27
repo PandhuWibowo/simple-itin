@@ -1,4 +1,4 @@
-//Hapus Room
+//Hapus Objek Wisata
 $("#example1").on("click", ".btnRemoveWisata", function(){
     let varId = $(this).data("wisata_id");
 

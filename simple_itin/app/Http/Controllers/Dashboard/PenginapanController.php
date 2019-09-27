@@ -120,7 +120,25 @@ class PenginapanController extends Controller
 
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
+        $penginapanId = trim($request->penginapan_id);
 
+        if(Penginapan::where("penginapan_id", $penginapanId)->delete()){
+            DetailPenginapan::where("penginapan_id", $penginapanId)->delete();
+            return response()->json(
+                array(
+                    "response"  => "success",
+                    "message"   => "Data has been removed"
+                )
+            );
+        }else{
+            return response()->json(
+                array(
+                    "response"  => "error",
+                    "message"   => "Data failed to remove"
+                )
+            );
+        }
     }
 }
