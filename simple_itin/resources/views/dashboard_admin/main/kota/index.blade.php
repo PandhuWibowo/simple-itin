@@ -57,17 +57,19 @@
 
             <hr>
 
-            <button data-toggle="tooltip" title="Add New" class="btn btn-primary btn-flat btn-md" data-toggle="modal" data-target="#addModalCity">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </button>
+
+
+            <span data-toggle="modal" data-target="#addModalCity">
+                <button type="button" title="Add New" class="btn btn-primary btn-flat btn-md">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </span>
 
             @include("dashboard_admin.main.kota.add_modal")
         </section>
 
         <!-- Main content -->
         <section class="content">
-
-
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
@@ -94,10 +96,10 @@
                                             <td>{{$row->nama_kota}}</td>
                                             <td>
                                                 <a class="btn btn-warning btn-md btn-flat btnEditCity" data-toggle="tooltip" title="Edit" data-city_id="{{$row->kota_id}}" data-city="{{$row->nama_kota}}">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    <i class="fa fa-pencil-square-o"></i>
                                                 </a>
                                                 <a class="btn btn-danger btn-md btn-flat btnRemoveCity" data-toggle="tooltip" title="Remove" data-city_id="{{$row->kota_id}}">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>

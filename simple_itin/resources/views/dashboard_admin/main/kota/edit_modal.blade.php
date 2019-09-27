@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="city">City</label>
-                        <input type="text" class="form-control" id="city" placeholder="City" required>
+                        <input type="text" class="form-control" id="edit_city" placeholder="City" required>
                     </div>
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="city_id" readonly>

@@ -53,8 +53,9 @@ $("#example1").on("click", ".btnEditCity", function(){
     let cityId = $(this).data("city_id");
     let city = $(this).data("city");
 
+
     $("#city_id").val(cityId);
-    $("#city").val(city);
+    $("#edit_city").val(city);
     $("#editModalCity").modal("show");
 });
 
@@ -63,7 +64,7 @@ $("#btnUpdateCity").on("click", function (e) {
     e.preventDefault();
 
     let cityId = $("#city_id").val();
-    let city = $("#city").val();
+    let city = $("#edit_city").val();
 
     if(city == "" || city == undefined){
         Swal.fire({
