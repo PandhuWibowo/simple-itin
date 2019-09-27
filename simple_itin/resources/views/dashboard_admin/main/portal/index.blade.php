@@ -58,7 +58,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('asset_portal/img/im-backpacker.jpg')">
+<header class="masthead" style="background-image: url('asset_portal/img/back.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -82,11 +82,17 @@
                         <div class="card-body">
                             <h3 class="card-title">{{$row->nama_kota}}</h3>
                             {{--                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>--}}
-                            <a href="{{ url("categories/reads/".$row->nama_kota) }}" class="btn btn-outline-light">Check it out</a>
+                            <a href="{{ url("categories/place/@".$row->nama_kota) }}" class="btn btn-outline-light">Check it out</a>
                         </div>
                     </div>
                 </div>
             @endforeach
+
+            <div class="col-sm-4">
+                {{--                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>--}}
+                {{$kota->links()}}
+            </div>
+
         @else
             <div class="col-sm-12 py-2">
                 <div class="card text-white bg-primary">
