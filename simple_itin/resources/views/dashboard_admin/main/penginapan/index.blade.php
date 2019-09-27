@@ -48,11 +48,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Tourist Attraction
+                Inn
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ url('backend/home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Tourist Attraction</li>
+                <li class="active">Inn</li>
             </ol>
 
             <hr>
@@ -73,7 +73,7 @@
 
                         <!-- ./box-header -->
                         <div class="box-header">
-                            <h3 class="box-title">Tourist Attraction</h3>
+                            <h3 class="box-title">Inn</h3>
                         </div>
 
                         <!-- ./box-body -->
