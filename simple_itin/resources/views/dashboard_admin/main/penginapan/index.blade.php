@@ -93,7 +93,7 @@
                                         <td>{{$seq+1}}</td>
                                         <td>{{$row->nama_penginapan}}</td>
                                         <td>
-                                            @foreach($row->getJenisPenginapan as $v)
+                                            @foreach($row->getPenginapan as $v)
                                                 <span class="label label-info">{{$v->nama_jenis_penginapan}}</span>
                                             @endforeach
                                         </td>

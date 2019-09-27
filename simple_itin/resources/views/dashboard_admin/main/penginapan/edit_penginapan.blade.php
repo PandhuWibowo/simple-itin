@@ -109,7 +109,15 @@
                                     <input type="file" id="image" name="image">
                                 </div>
 
-
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Room Type</label>
+                                    <select id="jenis_penginapan_id" name="jenis_penginapan_id[]" class="form-control jenis_penginapan_id" required multiple="multiple">
+                                        <option value=""></option>
+                                        @foreach($jenisPenginapan as $v)
+                                            <option value="{{$v->jenis_penginapan_id}}" @foreach($editPenginapan->getPenginapan as $row) @if($v->jenis_penginapan_id == $row->jenis_penginapan_id) selected @endif @endforeach>{{$v->nama_jenis_penginapan}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                             </div>
                             <!-- /.box-body -->
@@ -177,7 +185,7 @@
             showInputs: false
         });
 
-        $(".tag_id").select2({
+        $(".jenis_penginapan_id").select2({
             placeholder: "Please Select Tag first",
             tags: true,
             tokenSeparators: [',', ' '],

@@ -144,8 +144,8 @@ class PenginapanController extends Controller
 
                 for($i=0;$i<count($request->jenis_penginapan_id);$i++){
                     $detailPenginapan = new DetailPenginapan([
-                        "jenis_penginapan_id"  => $request->jenis_penginapan_id[$i],
-                        "penginapan_id"  => $penginapanId
+                        "penginapan_id"  => $penginapanId,
+                        "jenis_penginapan_id"  => $request->jenis_penginapan_id[$i]
                     ]);
 
                     $detailPenginapan->save();
@@ -167,8 +167,8 @@ class PenginapanController extends Controller
 
                 for($i=0;$i<count($request->jenis_penginapan_id);$i++){
                     $detailPenginapan = new DetailPenginapan([
-                        "jenis_penginapan_id"  => $request->jenis_penginapan_id[$i],
-                        "penginapan_id"  => $penginapanId
+                        "penginapan_id"  => $penginapanId,
+                        "jenis_penginapan_id"  => $request->jenis_penginapan_id[$i]
                     ]);
 
                     $detailPenginapan->save();
