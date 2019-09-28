@@ -233,13 +233,13 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('/asset_portal/img/im-backpacker.jpg')">
+<header class="masthead" style="background-image: url('/image/wisata/<?php echo $objekWisata->image;?>')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                    <h1>{{$kota}}</h1>
+                    <h1>{{$objekWisata->nama_wisata}}</h1>
                     <span class="subheading">Atourin - Indonesia Trip Planner</span>
                 </div>
             </div>
@@ -252,29 +252,7 @@
     <div class="grid">
         <div class="row">
 
-            @if(count($objekWisata) > 0)
-                @foreach($objekWisata as $row)
-                    <div class="col-md-4">
-                        <figure class="effect-ravi">
-                            <img src="{!! asset('image/wisata/'. $row->image) !!}" alt="{{$row->alt}}" />
-                            <figcaption>
-                                <h2>{{$row->nama_wisata}}</h2>
-                                <p>
-                                    <a href="{{ url('destination/'. $row->slug) }}"><i class="fa fa-search"></i></a>
-                                </p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                @endforeach
-            @else
-                <div class="col-sm-12 py-2">
-                    <div class="card text-white bg-primary">
-                        <div class="card-body text-center">
-                            There is no data
-                        </div>
-                    </div>
-                </div>
-            @endif
+
 
         </div>
     </div>

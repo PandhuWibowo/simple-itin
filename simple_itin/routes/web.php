@@ -28,6 +28,7 @@ Route::get('/backend/home', 'HomeController@index');
 Route::namespace("Portal")->group(function(){
     Route::get("/","HomeController@index");
     Route::get("categories/place/@{kota}","HomeController@tempatKota");
+    Route::get("destination/{objek_wisata}","HomeController@objekWisata");
 });
 Route::namespace("Dashboard")->group(function(){
     Route::prefix("/backend")->group(function (){
