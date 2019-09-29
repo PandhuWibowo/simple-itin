@@ -16,7 +16,7 @@ class HomeController extends Controller
 
     public function tempatKota($kota){
         $checkKotaId = Kota::select("kota_id")->where("nama_kota", $kota)->first();
-        $objekWisata = ObjekWisata::where("kota_id", $checkKotaId->kota_id)->paginate(12);
+        $objekWisata = ObjekWisata::where("kota_id", $checkKotaId->kota_id)->orderBy("created_at", "desc")->paginate(12);
 
         return view("dashboard_admin.main.portal.kategori_kota", compact("objekWisata","kota"));
     }

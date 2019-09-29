@@ -29,179 +29,37 @@
             right: 45px;
         }
 
+        .gallery-wrap .img-big-wrap img {
+            height: 450px;
+            width: auto;
+            display: inline-block;
+            cursor: zoom-in;
+        }
 
-        .grid figure {
-            position: relative;
-            float: left;
+
+        .gallery-wrap .img-small-wrap .item-gallery {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #ddd;
+            margin: 7px 2px;
+            display: inline-block;
             overflow: hidden;
-            background: #3085a3;
+        }
+
+        .gallery-wrap .img-small-wrap {
             text-align: center;
-            cursor: pointer;
         }
-
-        .grid figure img {
-            position: relative;
-            display: block;
-            min-height: 100%;
+        .gallery-wrap .img-small-wrap img {
             max-width: 100%;
-            opacity: 0.8;
-            margin: 0;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: zoom-in;
         }
 
-        .grid figure figcaption {
-            padding: 2em;
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 1.25em;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-
-        .grid figure figcaption::before,
-        .grid figure figcaption::after {
-            pointer-events: none;
-        }
-
-        .grid figure figcaption,
-        .grid figure figcaption>a {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .grid figure figcaption>a {
-            z-index: 1000;
-            text-indent: 200%;
-            white-space: nowrap;
-            font-size: 0;
-            opacity: 0;
-        }
-
-        .grid figure h2 {
-            word-spacing: -0.15em;
-            font-weight: 300;
-        }
-
-        .grid figure h2 span {
-            font-weight: 800;
-        }
-
-        .grid figure h2,
-        .grid figure p {
-            margin: 0;
-        }
-
-        .grid figure p {
-            letter-spacing: 1px;
-            font-size: 68.5%;
-        }
-
-
-
-        figure.effect-ravi {
-            background: #303fa9;
-            margin: 0;
-        }
-
-        .grid [class^="col"] {
-            padding: 2px;
-        }
-
-        figure.effect-ravi h2 {
-            font-size: 158.75%;
-        }
-
-        figure.effect-ravi h2,
-        figure.effect-ravi p {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-            transition: opacity 0.35s, transform 0.35s;
-            -webkit-transform: translate3d(-50%, -50%, 0);
-            transform: translate3d(-50%, -50%, 0);
-            -webkit-transform-origin: 50%;
-            transform-origin: 50%;
-        }
-
-        figure.effect-ravi figcaption::before {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120px;
-            height: 120px;
-            border: 2px solid #fff;
-            content: '';
-            opacity: 0;
-            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-            transition: opacity 0.35s, transform 0.35s;
-            -webkit-transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 1, -45deg) scale3d(0, 0, 1);
-            transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 1, -45deg) scale3d(0, 0, 1);
-            -webkit-transform-origin: 50%;
-            transform-origin: 50%;
-        }
-
-        figure.effect-ravi p {
-            width: 100px;
-            text-transform: none;
-            font-size: 121%;
-            line-height: 2;
-        }
-
-        figure.effect-ravi p a {
-            color: #fff;
-        }
-
-        figure.effect-ravi p a:hover,
-        figure.effect-ravi p a:focus {
-            opacity: 0.6;
-        }
-
-        figure.effect-ravi p a i {
-            opacity: 0;
-            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-            transition: opacity 0.35s, transform 0.35s;
-        }
-
-        figure.effect-ravi p a:first-child i {
-            -webkit-transform: translate3d(-60px, -60px, 0);
-            transform: translate3d(-60px, -60px, 0);
-        }
-
-        figure.effect-ravi p a:nth-child(2) i {
-            -webkit-transform: translate3d(60px, -60px, 0);
-            transform: translate3d(60px, -60px, 0);
-        }
-
-        figure.effect-ravi p a:nth-child(3) i {
-            -webkit-transform: translate3d(-60px, 60px, 0);
-            transform: translate3d(-60px, 60px, 0);
-        }
-
-        figure.effect-ravi p a:nth-child(4) i {
-            -webkit-transform: translate3d(60px, 60px, 0);
-            transform: translate3d(60px, 60px, 0);
-        }
-
-        figure.effect-ravi:hover figcaption::before {
-            opacity: 1;
-            -webkit-transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 1, -45deg) scale3d(1, 1, 1);
-            transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 1, -45deg) scale3d(1, 1, 1);
-        }
-
-        figure.effect-ravi:hover h2 {
-            opacity: 0;
-            -webkit-transform: translate3d(-50%, -50%, 0) scale3d(0.8, 0.8, 1);
-            transform: translate3d(-50%, -50%, 0) scale3d(0.8, 0.8, 1);
-        }
-
-        figure.effect-ravi:hover p i:empty {
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-            /* just because it's stronger than nth-child */
-            opacity: 1;
+        .deskripsi{
+            text-align: justify;
+            text-justify: inter-word;
         }
     </style>
 </head>
@@ -249,14 +107,93 @@
 
 <!-- Main Content -->
 <div class="container">
-    <div class="grid">
-        <div class="row">
+<div class="card">
+    <div class="row">
+        <aside class="col-sm-5 border-right">
+            <article class="gallery-wrap">
+                <div class="img-big-wrap">
+                    <div> <a href="{{ asset('image/wisata/'. $objekWisata->image3) }}"><img src="{{ asset('image/wisata/'. $objekWisata->image) }}"></a></div>
+                </div> <!-- slider-product.// -->
+{{--                <div class="img-small-wrap">--}}
+{{--                    <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>--}}
+{{--                    <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>--}}
+{{--                    <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>--}}
+{{--                    <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>--}}
+{{--                </div> <!-- slider-nav.// -->--}}
+            </article> <!-- gallery-wrap .end// -->
+        </aside>
+        <aside class="col-sm-7">
+            <article class="card-body p-5">
+                <h3 class="title mb-3">{{$objekWisata->nama_wisata}}</h3>
+
+{{--                <p class="price-detail-wrap">--}}
+{{--                    <span class="price h3 text-warning">--}}
+{{--                        <span class="currency">US $</span><span class="num">1299</span>--}}
+{{--                    </span>--}}
+{{--                    <span>/per kg</span>--}}
+{{--                </p> <!-- price-detail-wrap .// -->--}}
+                <dl class="item-property">
+                    <dt>Description</dt>
+                    <dd><p class="deskripsi">{{$objekWisata->deskripsi}}</p></dd>
+                </dl>
+                <dl class="param param-feature">
+                    <dt>Model#</dt>
+                    <dd>12345611</dd>
+                </dl>  <!-- item-property-hor .// -->
+                <dl class="param param-feature">
+                    <dt>Color</dt>
+                    <dd>Black and white</dd>
+                </dl>  <!-- item-property-hor .// -->
+                <dl class="param param-feature">
+                    <dt>Delivery</dt>
+                    <dd>Russia, USA, and Europe</dd>
+                </dl>  <!-- item-property-hor .// -->
+
+                <hr>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <dl class="param param-inline">
+                            <dt>Quantity: </dt>
+                            <dd>
+                                <select class="form-control form-control-sm" style="width:70px;">
+                                    <option> 1 </option>
+                                    <option> 2 </option>
+                                    <option> 3 </option>
+                                </select>
+                            </dd>
+                        </dl>  <!-- item-property .// -->
+                    </div> <!-- col.// -->
+                    <div class="col-sm-7">
+                        <dl class="param param-inline">
+                            <dt>Size: </dt>
+                            <dd>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <span class="form-check-label">SM</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <span class="form-check-label">MD</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <span class="form-check-label">XXL</span>
+                                </label>
+                            </dd>
+                        </dl>  <!-- item-property .// -->
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+                <hr>
+                <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
+                <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+            </article> <!-- card-body.// -->
+        </aside> <!-- col.// -->
+    </div> <!-- row.// -->
+</div> <!-- card.// -->
 
 
-
-        </div>
-    </div>
 </div>
+<!--container.//-->
 
 <!-- Footer -->
 <footer>
