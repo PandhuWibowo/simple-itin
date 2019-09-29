@@ -254,17 +254,16 @@
 
             @if(count($objekWisata) > 0)
                 @foreach($objekWisata as $row)
-                    <div class="col-md-4">
-                        <figure class="effect-ravi">
-                            <img src="{!! asset('image/wisata/'. $row->image) !!}" alt="{{$row->alt}}" />
-                            <figcaption>
-                                <h2>{{$row->nama_wisata}}</h2>
-                                <p>
-                                    <a href="{{ url('destination/'. $row->slug) }}"><i class="fa fa-search"></i></a>
-                                </p>
-                            </figcaption>
-                        </figure>
-                    </div>
+                    <a href="{{ url('destination/'. $row->slug) }}">
+                        <div class="col-md-4">
+                            <figure class="effect-ravi">
+                                <img src="{!! asset('image/wisata/'. $row->image) !!}" alt="{{$row->alt}}" />
+                                <figcaption>
+                                    <h2>{{$row->nama_wisata}}</h2>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </a>
                 @endforeach
             @else
                 <div class="col-sm-12 py-2">

@@ -125,7 +125,9 @@
         <aside class="col-sm-7">
             <article class="card-body p-5">
                 <h3 class="title mb-3">{{$objekWisata->nama_wisata}}</h3>
-
+                @foreach($objekWisata->getTag as $row)
+                    <span class="badge badge-primary">{{$row->nama_tag}}</span>
+                @endforeach
 {{--                <p class="price-detail-wrap">--}}
 {{--                    <span class="price h3 text-warning">--}}
 {{--                        <span class="currency">US $</span><span class="num">1299</span>--}}
@@ -134,15 +136,36 @@
 {{--                </p> <!-- price-detail-wrap .// -->--}}
                 <dl class="item-property">
                     <dt>Description</dt>
-                    <dd><p class="deskripsi">{{$objekWisata->deskripsi}}</p></dd>
+                    <dd class="deskripsi">{{$objekWisata->deskripsi}}</dd>
                 </dl>
                 <dl class="param param-feature">
-                    <dt>Model#</dt>
-                    <dd>12345611</dd>
+                    <dt>Contact</dt>
+                    <dd>{{$objekWisata->kontak}}</dd>
                 </dl>  <!-- item-property-hor .// -->
                 <dl class="param param-feature">
-                    <dt>Color</dt>
-                    <dd>Black and white</dd>
+                    <dt>Address</dt>
+                    <dd>
+                        <button type="button" class="btn btn-info btn-md" id="lookModal" data-maps="{{$objekWisata->alamat}}" data-toggle="modal" data-target="#modalMaps">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            View
+                        </button>
+                        <!-- Modal -->
+                        <div id="modalMaps" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Address</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="place"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </dd>
                 </dl>  <!-- item-property-hor .// -->
                 <dl class="param param-feature">
                     <dt>Delivery</dt>
@@ -238,7 +261,19 @@
 
 <!-- Custom scripts for this template -->
 <script src="{!! asset('asset_portal/js/clean-blog.min.js') !!}"></script>
+<script>
+    $(document).ready( function(){
+        $("#lookModal").on("click", function(){
+            let maps = $(this).data("maps");
+            // var addr = 'Any Street 670, Any City';
 
+            var embed= "<iframe width='100%' height='350' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?&amp;q="+encodeURIComponent( maps ) +"&amp;output=embed'></iframe>";
+            $('.place').html(embed);
+
+        });
+
+    });
+</script>
 </body>
 
 </html>
