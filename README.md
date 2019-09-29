@@ -7,4 +7,10 @@
     <td>:</td>
     <td>admin@gmail.com</td>
   </tr>
+  <tr>
+    <td>Password</td>
+    <td>:</td>
+    <td>admin123</td>
+  </tr>
+</table>
   
