@@ -112,7 +112,7 @@
         <aside class="col-sm-5 border-right">
             <article class="gallery-wrap">
                 <div class="img-big-wrap">
-                    <div> <a href="{{ asset('image/wisata/'. $objekWisata->image3) }}"><img src="{{ asset('image/wisata/'. $objekWisata->image) }}"></a></div>
+                    <div> <a href="{{ asset('image/wisata/'. $objekWisata->image) }}"><img src="{{ asset('image/wisata/'. $objekWisata->image) }}" alt="{{$objekWisata->alt}}" class="img-fluid"></a></div>
                 </div> <!-- slider-product.// -->
 {{--                <div class="img-small-wrap">--}}
 {{--                    <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>--}}
